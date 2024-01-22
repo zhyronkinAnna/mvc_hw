@@ -1,13 +1,24 @@
 <?php
 namespace Core\Controllers;
-class MainController{
+
+use Core\View;
+use Services\Db;
+
+class MainController extends Controller{
     public function home() : void
     {
-        echo 'Home';
+        $pdo = Db::getInstance();
+        $categories = $pdo->query('SELECT * FROM categories'); 
+
+
+        $title = 'Main Page';
+        View::render('home', compact('title', 'categories'));
     }
 
     public function contacts(): void
     {
-        echo 'Contacts';
+        View::render('main/contacts');
     }
 }
+
+
